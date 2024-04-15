@@ -18,7 +18,40 @@ export default function (server, mongoose) {
   // GET all books (w/ parameters)
   server.get('/api/books', async (req, res) => {
     try {
-      const books = await Book.find().populate('authors');
+      const sortBy = req.query.sortBy;
+      const order = req.query.order;
+
+      console.log('Sort by:', sortBy);
+      console.log('Order:', order);
+
+      let books = await Book.find().populate('authors');
+
+      if (sortBy) {
+        let sortOrder = 1;
+        if (order && order.toLowerCase() === 'desc') {
+          sortOrder = -1;
+        }
+
+        // Parameters sorting
+        switch (sortBy) {
+          case 'title':
+          case 'genre':
+            books = books.sort((a, b) => (a[sortBy].localeCompare(b[sortBy])) * sortOrder);
+            break;
+          case 'publicationDate':
+            books = books.sort((a, b) => (new Date(a[sortBy]) - new Date(b[sortBy])) * sortOrder);
+            break;
+          case 'score':
+            books = books.sort((a, b) => (a[sortBy] - b[sortBy]) * sortOrder);
+            break;
+          default:
+            break;
+        }
+
+        if (sortOrder === -1) {
+          books = books.reverse();
+        }
+      }
 
       if (!books || books.length === 0) {
         return res.status(404).json({ message: "No books found" });
@@ -29,7 +62,6 @@ export default function (server, mongoose) {
       res.status(500).json({ message: "An error occurred on the server while retrieving books." });
     }
   });
-
 
   // GET book ID
   server.get('/api/books/:id', async (req, res) => {
@@ -44,8 +76,6 @@ export default function (server, mongoose) {
       res.status(500).json({ message: "An error occurred on the server while retrieving a user." });
     }
   });
-
-
 
   // POST book(s)
   server.post('/api/books', async (req, res) => {

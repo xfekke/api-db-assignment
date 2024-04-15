@@ -1,4 +1,4 @@
-Author Mockaroo Mockdata
+Author Mockaroo Mockdata / JSON
 
 [
   {"firstName": "Odetta", "lastName": "Dmych"},
