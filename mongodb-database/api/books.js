@@ -1,11 +1,11 @@
 export default function (server, mongoose) {
 
-  // Skapar ett schema för "users", vilket definierar strukturen för varje "user"-dokument i databasen.
+  // Schema for books
   const bookSchema = new mongoose.Schema({
     title: String,
     authors: [{
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'authors' // Referens till författare
+      ref: 'authors' // Reference to get author data
     }],
     genre: String,
     publicationDate: Number,
@@ -13,25 +13,18 @@ export default function (server, mongoose) {
     score: Number
   });
 
-  /* 
-    Skapar en Mongoose-modell baserat på bookSchema.
-    Detta möjliggör för oss att skapa, läsa, uppdatera och radera (CRUD) dokument i vår "users"-samling (collection).
-  */
   const Book = mongoose.model("books", bookSchema);
 
-  /*
-  Skapar en GET-route på '/api/users'. 
-  När denna route anropas, hämtar den alla dokument från vår "users"-samling och skickar tillbaka dem som ett JSON-svar.
-  */
+  // GET all books (w/ parameters)
   server.get('/api/books', async (req, res) => {
     try {
-      res.json(await Book.find());  // Använder Mongoose's "find"-metod för att hämta alla "users".
+      res.json(await Book.find());
     } catch (error) {
       res.status(500).json({ message: "An error occurred on the server while retrieving a user." });
     }
   });
 
-  // Skapar en GET-route för att hämta en specifik användare med ett specifikt ID.
+  // GET book ID
   server.get('/api/books/:id', async (req, res) => {
     try {
       const book = await Book.findById(req.params.id).populate('authors');
@@ -46,39 +39,50 @@ export default function (server, mongoose) {
   });
 
 
-  // Skapar en POST-route för att lägga till en ny bok.
+
+  // POST book(s)
   server.post('/api/books', async (req, res) => {
     try {
-      const newBook = new Book({
-        title: req.body.title,
-        authors: req.body.authors, // Använd req.body.authors för att ta emot en array av författar-ID
-        genre: req.body.genre,
-        publicationDate: req.body.publicationDate
-      });
+      const booksData = req.body;
 
-      // Spara den nya boken
-      const savedBook = await newBook.save();
+      const createdBooks = []; // array to contain new books
 
-      // Returnera den sparade boken i svaret
-      res.status(201).json(savedBook);
+      for (const bookData of booksData) {
+        const newBook = new Book({
+          title: bookData.title,
+          authors: bookData.authors,
+          genre: bookData.genre,
+          publicationDate: bookData.publicationDate,
+          info: bookData.info,
+          score: bookData.score
+        });
+
+        const savedBook = await newBook.save();
+
+        // Puts the saved book in the array
+        createdBooks.push(savedBook);
+      }
+
+      res.status(201).json(createdBooks);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: "An error occurred on the server while creating a new book." });
+      res.status(500).json({ message: "An error occurred on the server while creating new books." });
     }
   });
 
-
-
-  // Skapar en PUT-route för att uppdatera en användare med ett specifikt ID.
+  // PUT/UPDATE books
   server.put('/api/books/:id', async (req, res) => {
     try {
       const updatedBook = await Book.findByIdAndUpdate(req.params.id, {
         $set: {
-          name: req.body.name,  // Uppdatera 'username'
-          born: req.body.born,      // Uppdatera 'author'
-
+          title: req.body.title,
+          authors: req.body.authors,
+          genre: req.body.genre,
+          publicationDate: req.body.publicationDate,
+          info: req.body.info,
+          score: req.body.score
         }
-      }, { new: true });  // Optionen { new: true } ser till att den uppdaterade användaren returneras
+      }, { new: true });
 
       if (!updatedBook) {
         return res.status(404).json({ message: "Book not found" });
@@ -90,7 +94,7 @@ export default function (server, mongoose) {
     }
   });
 
-  // Skapar en DELETE-route för att radera en användare med ett specifikt ID.
+  // DELETE specific book by ID
   server.delete('/api/books/:id', async (req, res) => {
     try {
       const deletedBook = await Book.findByIdAndDelete(req.params.id);
