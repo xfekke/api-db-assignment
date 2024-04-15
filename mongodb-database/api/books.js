@@ -8,7 +8,7 @@ export default function (server, mongoose) {
       ref: 'authors' // Reference to get author data
     }],
     genre: String,
-    publicationDate: Number,
+    publicationDate: String,
     info: String,
     score: Number
   });
@@ -18,11 +18,18 @@ export default function (server, mongoose) {
   // GET all books (w/ parameters)
   server.get('/api/books', async (req, res) => {
     try {
-      res.json(await Book.find());
+      const books = await Book.find().populate('authors');
+
+      if (!books || books.length === 0) {
+        return res.status(404).json({ message: "No books found" });
+      }
+      res.json(books);
     } catch (error) {
-      res.status(500).json({ message: "An error occurred on the server while retrieving a user." });
+      console.error(error);
+      res.status(500).json({ message: "An error occurred on the server while retrieving books." });
     }
   });
+
 
   // GET book ID
   server.get('/api/books/:id', async (req, res) => {
