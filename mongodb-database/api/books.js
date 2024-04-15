@@ -2,8 +2,15 @@ export default function (server, mongoose) {
 
   // Skapar ett schema för "users", vilket definierar strukturen för varje "user"-dokument i databasen.
   const bookSchema = new mongoose.Schema({
-    name: String,
-    born: Number
+    title: String,
+
+    author: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'authors' // Referens till författare
+    },
+
+    genre: String,
+    publicationDate: Number
   });
 
   /* 
@@ -20,14 +27,15 @@ export default function (server, mongoose) {
     try {
       res.json(await Book.find());  // Använder Mongoose's "find"-metod för att hämta alla "users".
     } catch (error) {
-      res.status(500).json({ message: "Ett fel uppstod på servern vid hämtning av användare." });
+      res.status(500).json({ message: "An error occurred on the server while retrieving a user." });
     }
   });
 
   // Skapar en GET-route för att hämta en specifik användare med ett specifikt ID.
   server.get('/api/books/:id', async (req, res) => {
     try {
-      const book = await Book.findById(req.params.id); // Hämtar användaren med ID från databasen.
+      const book = await Book.findById(req.params.id).populate('author');
+
       if (!book) {
         return res.status(404).json({ message: "Book was not found" });
       }
@@ -41,8 +49,10 @@ export default function (server, mongoose) {
   server.post('/api/books', async (req, res) => {
     try {
       const newBook = new Book({
-        name: req.body.name,
-        born: req.body.born,
+        title: req.body.title,
+        author: req.body.author,
+        genre: req.body.genre,
+        publicationDate: req.body.publicationDate
       });
       const savedBook = await newBook.save();
       res.status(201).json(savedBook);
