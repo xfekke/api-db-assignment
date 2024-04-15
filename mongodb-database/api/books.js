@@ -20,11 +20,19 @@ export default function (server, mongoose) {
     try {
       const sortBy = req.query.sortBy;
       const order = req.query.order;
+      const genre = req.query.genre; // Add genre parameter
 
       console.log('Sort by:', sortBy);
       console.log('Order:', order);
+      console.log('Genre:', genre);
 
-      let books = await Book.find().populate('authors');
+      // Query to filter books by genre if genre parameter is provided
+      let query = {};
+      if (genre) {
+        query.genre = genre;
+      }
+
+      let books = await Book.find(query).populate('authors');
 
       if (sortBy) {
         let sortOrder = 1;
@@ -35,14 +43,16 @@ export default function (server, mongoose) {
         // Parameters sorting
         switch (sortBy) {
           case 'title':
+            books = books.sort((a, b) => a.title.localeCompare(b.title) * sortOrder);
+            break;
           case 'genre':
-            books = books.sort((a, b) => (a[sortBy].localeCompare(b[sortBy])) * sortOrder);
+            books = books.sort((a, b) => a.genre.localeCompare(b.genre) * sortOrder);
             break;
           case 'publicationDate':
-            books = books.sort((a, b) => (new Date(a[sortBy]) - new Date(b[sortBy])) * sortOrder);
+            books = books.sort((a, b) => (new Date(a.publicationDate) - new Date(b.publicationDate)) * sortOrder);
             break;
           case 'score':
-            books = books.sort((a, b) => (a[sortBy] - b[sortBy]) * sortOrder);
+            books = books.sort((a, b) => (a.score - b.score) * sortOrder);
             break;
           default:
             break;
@@ -62,6 +72,7 @@ export default function (server, mongoose) {
       res.status(500).json({ message: "An error occurred on the server while retrieving books." });
     }
   });
+
 
   // GET book ID
   server.get('/api/books/:id', async (req, res) => {
