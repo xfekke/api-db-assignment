@@ -8,7 +8,9 @@ export default function (server, mongoose) {
       ref: 'authors' // Referens till författare
     }],
     genre: String,
-    publicationDate: Number
+    publicationDate: Number,
+    info: String,
+    score: Number
   });
 
   /* 
