@@ -3,12 +3,10 @@ export default function (server, mongoose) {
   // Skapar ett schema för "users", vilket definierar strukturen för varje "user"-dokument i databasen.
   const bookSchema = new mongoose.Schema({
     title: String,
-
-    author: {
+    authors: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'authors' // Referens till författare
-    },
-
+    }],
     genre: String,
     publicationDate: Number
   });
@@ -34,7 +32,7 @@ export default function (server, mongoose) {
   // Skapar en GET-route för att hämta en specifik användare med ett specifikt ID.
   server.get('/api/books/:id', async (req, res) => {
     try {
-      const book = await Book.findById(req.params.id).populate('author');
+      const book = await Book.findById(req.params.id).populate('authors');
 
       if (!book) {
         return res.status(404).json({ message: "Book was not found" });
@@ -45,22 +43,29 @@ export default function (server, mongoose) {
     }
   });
 
-  // Skapar en POST-route för att lägga till en ny användare.
+
+  // Skapar en POST-route för att lägga till en ny bok.
   server.post('/api/books', async (req, res) => {
     try {
       const newBook = new Book({
         title: req.body.title,
-        author: req.body.author,
+        authors: req.body.authors, // Använd req.body.authors för att ta emot en array av författar-ID
         genre: req.body.genre,
         publicationDate: req.body.publicationDate
       });
+
+      // Spara den nya boken
       const savedBook = await newBook.save();
+
+      // Returnera den sparade boken i svaret
       res.status(201).json(savedBook);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: "An error occurred on the server while creating a new user." });
+      res.status(500).json({ message: "An error occurred on the server while creating a new book." });
     }
   });
+
+
 
   // Skapar en PUT-route för att uppdatera en användare med ett specifikt ID.
   server.put('/api/books/:id', async (req, res) => {

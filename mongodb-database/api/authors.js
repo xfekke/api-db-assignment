@@ -10,7 +10,20 @@ export default function (server, mongoose) {
   // GET Author
   server.get('/api/authors', async (req, res) => {
     try {
-      res.json(await Author.find());
+      let authors = await Author.find();
+
+      // Checks for sorting parameters
+      if (req.query.sortBy) {
+        const sortBy = req.query.sortBy;
+        let sortOrder = 1; 
+
+        if (req.query.order && req.query.order.toLowerCase() === 'desc') {
+          sortOrder = -1;
+        }
+        authors = authors.sort((a, b) => (a[sortBy] > b[sortBy] ? sortOrder : -sortOrder));
+      }
+
+      res.json(authors);
     } catch (error) {
       res.status(500).json({ message: "An error occurred on the server while retrieving authors." });
     }
@@ -32,7 +45,7 @@ export default function (server, mongoose) {
   // POST Author
   server.post('/api/authors', async (req, res) => {
     try {
-      const authorsData = req.body; 
+      const authorsData = req.body;
       const createdAuthors = [];
 
       for (const authorData of authorsData) {
