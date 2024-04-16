@@ -52,7 +52,6 @@ export default function (server, mongoose) {
     }
   });
 
-
   // GET book ID
   server.get('/api/books/:id', async (req, res) => {
     try {
@@ -134,4 +133,5 @@ export default function (server, mongoose) {
       res.status(500).json({ message: "An error occurred on the server while deleting users." });
     }
   });
+
 }
