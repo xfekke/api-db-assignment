@@ -10,12 +10,20 @@ export default function (server, mongoose) {
   // GET Author
   server.get('/api/authors', async (req, res) => {
     try {
-      let authors = await Author.find();
+      let query = {};
 
-      // Checks for sorting parameters
+      if (req.query.firstName) {
+        query.firstName = req.query.firstName;
+      }
+      if (req.query.lastName) {
+        query.lastName = req.query.lastName;
+      }
+
+      let authors = await Author.find(query);
+
       if (req.query.sortBy) {
         const sortBy = req.query.sortBy;
-        let sortOrder = 1; 
+        let sortOrder = 1;
 
         if (req.query.order && req.query.order.toLowerCase() === 'desc') {
           sortOrder = -1;

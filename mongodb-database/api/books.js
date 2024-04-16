@@ -21,7 +21,6 @@ export default function (server, mongoose) {
   // GET all books (w/ parameters)
   server.get('/api/books', async (req, res) => {
     try {
-      let books;
       const sortBy = req.query.sortBy;
       const order = req.query.order;
       const genre = req.query.genre;
@@ -29,56 +28,30 @@ export default function (server, mongoose) {
       const limit = parseInt(req.query.limit) || 10;
 
       let query = {};
+      if (genre) {
+        query.genre = genre;
+      }
+
       const options = {
         page: page,
         limit: limit,
         sort: sortBy ? { [sortBy]: order === 'desc' ? -1 : 1 } : null,
         populate: 'authors'
       };
-      books = await Book.paginate(query, options);
+
+      const books = await Book.paginate(query, options);
 
       if (!books || books.docs.length === 0) {
         return res.status(404).json({ message: "No books found" });
       }
-      if (genre) {
-        query.genre = genre;
-      }
-      let filteredBooks = await Book.find(query).populate('authors');
-      if (sortBy) {
-        let sortOrder = 1;
-        if (order && order.toLowerCase() === 'desc') {
-          sortOrder = -1;
-        }
-        // Parameters sorting
-        switch (sortBy) {
-          case 'title':
-            filteredBooks = filteredBooks.sort((a, b) => a.title.localeCompare(b.title) * sortOrder);
-            break;
-          case 'genre':
-            filteredBooks = filteredBooks.sort((a, b) => a.genre.localeCompare(b.genre) * sortOrder);
-            break;
-          case 'publicationDate':
-            filteredBooks = filteredBooks.sort((a, b) => (new Date(a.publicationDate) - new Date(b.publicationDate)) * sortOrder);
-            break;
-          case 'score':
-            filteredBooks = filteredBooks.sort((a, b) => (a.score - b.score) * sortOrder);
-            break;
-          default:
-            break;
-        }
-        if (sortOrder === -1) {
-          filteredBooks = filteredBooks.reverse();
-        }
-      }
-      if (!filteredBooks || filteredBooks.length === 0) {
-        return res.status(404).json({ message: "No books found" });
-      }
-      res.json(filteredBooks);
+
+      res.json(books);
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: "An error occurred on the server while retrieving books." });
     }
   });
+
 
   // GET book ID
   server.get('/api/books/:id', async (req, res) => {
