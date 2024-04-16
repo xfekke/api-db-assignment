@@ -1,3 +1,5 @@
+import mongoosePaginate from 'mongoose-paginate-v2';
+
 export default function (server, mongoose) {
 
   // Schema for books
@@ -13,26 +15,35 @@ export default function (server, mongoose) {
     score: Number
   });
 
+  bookSchema.plugin(mongoosePaginate);
   const Book = mongoose.model("books", bookSchema);
 
   // GET all books (w/ parameters)
   server.get('/api/books', async (req, res) => {
     try {
+      let books;
       const sortBy = req.query.sortBy;
       const order = req.query.order;
-      const genre = req.query.genre; 
-
-      console.log('Sort by:', sortBy);
-      console.log('Order:', order);
-      console.log('Genre:', genre);
+      const genre = req.query.genre;
+      const page = parseInt(req.query.page) || 1;
+      const limit = parseInt(req.query.limit) || 10;
 
       let query = {};
+      const options = {
+        page: page,
+        limit: limit,
+        sort: sortBy ? { [sortBy]: order === 'desc' ? -1 : 1 } : null,
+        populate: 'authors'
+      };
+      books = await Book.paginate(query, options);
+
+      if (!books || books.docs.length === 0) {
+        return res.status(404).json({ message: "No books found" });
+      }
       if (genre) {
         query.genre = genre;
       }
-
-      let books = await Book.find(query).populate('authors');
-
+      let filteredBooks = await Book.find(query).populate('authors');
       if (sortBy) {
         let sortOrder = 1;
         if (order && order.toLowerCase() === 'desc') {
@@ -41,36 +52,33 @@ export default function (server, mongoose) {
         // Parameters sorting
         switch (sortBy) {
           case 'title':
-            books = books.sort((a, b) => a.title.localeCompare(b.title) * sortOrder);
+            filteredBooks = filteredBooks.sort((a, b) => a.title.localeCompare(b.title) * sortOrder);
             break;
           case 'genre':
-            books = books.sort((a, b) => a.genre.localeCompare(b.genre) * sortOrder);
+            filteredBooks = filteredBooks.sort((a, b) => a.genre.localeCompare(b.genre) * sortOrder);
             break;
           case 'publicationDate':
-            books = books.sort((a, b) => (new Date(a.publicationDate) - new Date(b.publicationDate)) * sortOrder);
+            filteredBooks = filteredBooks.sort((a, b) => (new Date(a.publicationDate) - new Date(b.publicationDate)) * sortOrder);
             break;
           case 'score':
-            books = books.sort((a, b) => (a.score - b.score) * sortOrder);
+            filteredBooks = filteredBooks.sort((a, b) => (a.score - b.score) * sortOrder);
             break;
           default:
             break;
         }
-
         if (sortOrder === -1) {
-          books = books.reverse();
+          filteredBooks = filteredBooks.reverse();
         }
       }
-
-      if (!books || books.length === 0) {
+      if (!filteredBooks || filteredBooks.length === 0) {
         return res.status(404).json({ message: "No books found" });
       }
-      res.json(books);
+      res.json(filteredBooks);
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: "An error occurred on the server while retrieving books." });
     }
   });
-
 
   // GET book ID
   server.get('/api/books/:id', async (req, res) => {
