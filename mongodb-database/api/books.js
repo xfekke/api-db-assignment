@@ -20,13 +20,12 @@ export default function (server, mongoose) {
     try {
       const sortBy = req.query.sortBy;
       const order = req.query.order;
-      const genre = req.query.genre; // Add genre parameter
+      const genre = req.query.genre; 
 
       console.log('Sort by:', sortBy);
       console.log('Order:', order);
       console.log('Genre:', genre);
 
-      // Query to filter books by genre if genre parameter is provided
       let query = {};
       if (genre) {
         query.genre = genre;
@@ -39,7 +38,6 @@ export default function (server, mongoose) {
         if (order && order.toLowerCase() === 'desc') {
           sortOrder = -1;
         }
-
         // Parameters sorting
         switch (sortBy) {
           case 'title':
@@ -93,7 +91,7 @@ export default function (server, mongoose) {
     try {
       const booksData = req.body;
 
-      const createdBooks = []; // array to contain new books
+      const createdBooks = []; // Array to post multiple books
 
       for (const bookData of booksData) {
         const newBook = new Book({
@@ -155,5 +153,4 @@ export default function (server, mongoose) {
       res.status(500).json({ message: "An error occurred on the server while deleting users." });
     }
   });
-
 }
