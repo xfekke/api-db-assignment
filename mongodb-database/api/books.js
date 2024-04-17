@@ -2,6 +2,7 @@ import mongoosePaginate from 'mongoose-paginate-v2';
 
 export default function (server, mongoose) {
 
+
   // Schema for books
   const bookSchema = new mongoose.Schema({
     title: String,
@@ -62,7 +63,7 @@ export default function (server, mongoose) {
       }
       res.json(book);
     } catch (error) {
-      res.status(500).json({ message: "An error occurred on the server while retrieving a user." });
+      res.status(500).json({ message: "An error occurred on the server while retrieving a book." });
     }
   });
 
@@ -133,5 +134,7 @@ export default function (server, mongoose) {
       res.status(500).json({ message: "An error occurred on the server while deleting users." });
     }
   });
-
+  server.get('/api/books/invalid', async (req, res) => {
+    res.status(400).json({ message: "Ogiltig förfrågan" });
+  });
 }
