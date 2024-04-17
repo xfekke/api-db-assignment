@@ -19,6 +19,8 @@ Verify that the API returns the correct HTTP status code (e.g., 200 OK) for a su
 
 **Location:** /Tests /Get-requests/GET books & /GET authors
 
+...
+
 # Manual Testing 2
 
 ## JSON-format
