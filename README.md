@@ -53,28 +53,40 @@ Retrieve a list of authors.
 
 #### GET /api
 
-Retrieve a list of books.
-
-#### GET /api/books/:id
-
-Retrieve information about a specific book.
-
-#### POST /api
-
-Create a new book entry.
-
-#### POST /api/books/:id
-
-Delete a book entry.
-
-### Request and Response Examples
-
-####  Get a list of books
+### Retrieve a list of books.
 
 **Request:**
 
+#### GET http://localhost:3000/api
+
 **Response:**
-```json
+```
+{
+            "_id": "661d4b8ec98662b7dc6d7457",
+            "title": "Echoes of the Future",
+            "authors": [
+                {
+                    "_id": "661d10a0fae54bc397af0edd",
+                    "firstName": "Odetta",
+                    "lastName": "Dmych",
+                    "__v": 0
+                }
+            ],
+            "genre": "Science Fiction",
+            "publicationDate": "2023-05-15",
+            "info": "A gripping tale set in a futuristic world where echoes of the past hold the key to humanity's destiny.",
+            "score": 6,
+            "__v": 0
+        }
+```
+### Get a specific book
+
+**Request:**
+
+#### GET http://localhost:3000/api/books/661d4b8ec98662b7dc6d7457
+
+**Response:**
+```
 {
     "_id": "661d4b8ec98662b7dc6d7457",
     "title": "Echoes of the Future",
@@ -92,4 +104,39 @@ Delete a book entry.
     "score": 6,
     "__v": 0
 }
-``` 
+```
+### Create a book
+
+**Request:**
+
+#### POST http://localhost:3000/api
+
+**Response:**
+```
+[
+    {
+        "title": "Concurrent Book 1",
+        "authors": [
+            "661d11f0fae54bc397af0f31"
+        ],
+        "genre": "Science Fiction",
+        "publicationDate": "2012-02-10",
+        "info": "This is a test.",
+        "score": 7,
+        "_id": "66213251fc8543202b1a9166",
+        "__v": 0
+    }
+]
+```
+### Delete that book!
+
+**Request:**
+
+#### POST http://localhost:3000/api/books/66213251fc8543202b1a9166
+
+**Response:**
+```
+{
+    "message": "Book has been deleted!"
+}
+```
