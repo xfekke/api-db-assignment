@@ -1,8 +1,7 @@
 import mongoosePaginate from 'mongoose-paginate-v2';
 
 export default function (server, mongoose) {
-
-
+  let isConnected = true
   // Schema for books
   const bookSchema = new mongoose.Schema({
     title: String,
@@ -22,6 +21,18 @@ export default function (server, mongoose) {
   // GET all books (w/ parameters)
   server.get('/api/books', async (req, res) => {
     try {
+      if (req.query.disconnect === 'true') {
+        if (isConnected) {
+          await mongoose.disconnect();
+          isConnected = false;
+        }
+      } else {
+        if (!isConnected) {
+          // Reconnect
+          await mongoose.connect("mongodb+srv://fekkeru:qwerty1234@cluster0.w3hrvjd.mongodb.net/");
+          isConnected = true;
+        }
+      }
       const sortBy = req.query.sortBy;
       const order = req.query.order;
       const genre = req.query.genre;
@@ -56,6 +67,18 @@ export default function (server, mongoose) {
   // GET book ID
   server.get('/api/books/:id', async (req, res) => {
     try {
+      if (req.query.disconnect === 'true') {
+        if (isConnected) {
+          await mongoose.disconnect();
+          isConnected = false;
+        }
+      } else {
+        if (!isConnected) {
+          // Reconnect
+          await mongoose.connect("mongodb+srv://fekkeru:qwerty1234@cluster0.w3hrvjd.mongodb.net/");
+          isConnected = true;
+        }
+      }
       const book = await Book.findById(req.params.id).populate('authors');
 
       if (!book) {
@@ -70,6 +93,18 @@ export default function (server, mongoose) {
   // POST book(s)
   server.post('/api/books', async (req, res) => {
     try {
+      if (req.query.disconnect === 'true') {
+        if (isConnected) {
+          await mongoose.disconnect();
+          isConnected = false;
+        }
+      } else {
+        if (!isConnected) {
+          // Reconnect
+          await mongoose.connect("mongodb+srv://fekkeru:qwerty1234@cluster0.w3hrvjd.mongodb.net/");
+          isConnected = true;
+        }
+      }
       const booksData = req.body;
 
       const createdBooks = []; // Array to post multiple books
@@ -100,6 +135,18 @@ export default function (server, mongoose) {
   // PUT/UPDATE books
   server.put('/api/books/:id', async (req, res) => {
     try {
+      if (req.query.disconnect === 'true') {
+        if (isConnected) {
+          await mongoose.disconnect();
+          isConnected = false;
+        }
+      } else {
+        if (!isConnected) {
+          // Reconnect
+          await mongoose.connect("mongodb+srv://fekkeru:qwerty1234@cluster0.w3hrvjd.mongodb.net/");
+          isConnected = true;
+        }
+      }
       const updatedBook = await Book.findByIdAndUpdate(req.params.id, {
         $set: {
           title: req.body.title,
@@ -124,6 +171,18 @@ export default function (server, mongoose) {
   // DELETE specific book by ID
   server.delete('/api/books/:id', async (req, res) => {
     try {
+      if (req.query.disconnect === 'true') {
+        if (isConnected) {
+          await mongoose.disconnect();
+          isConnected = false;
+        }
+      } else {
+        if (!isConnected) {
+          // Reconnect
+          await mongoose.connect("mongodb+srv://fekkeru:qwerty1234@cluster0.w3hrvjd.mongodb.net/");
+          isConnected = true;
+        }
+      }
       const deletedBook = await Book.findByIdAndDelete(req.params.id);
       if (!deletedBook) {
         return res.status(404).json({ message: "Book not found" });
