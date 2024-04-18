@@ -83,24 +83,24 @@ Retrieve a list of authors.
 
 **Request:**
 
-#### GET http://localhost:3000/api/books/661d4b8ec98662b7dc6d7457
+#### GET http://localhost:3000/api/books/661d4b8ec98662b7dc6d745d
 
 **Response:**
 ```
 {
-    "_id": "661d4b8ec98662b7dc6d7457",
-    "title": "Echoes of the Future",
+    "_id": "661d4b8ec98662b7dc6d745d",
+    "title": "Dystopian Dreams",
     "authors": [
         {
-            "_id": "661d10a0fae54bc397af0edd",
-            "firstName": "Odetta",
-            "lastName": "Dmych",
+            "_id": "661d10a0fae54bc397af0ee3",
+            "firstName": "Jorie",
+            "lastName": "O'Nion",
             "__v": 0
         }
     ],
-    "genre": "Science Fiction",
-    "publicationDate": "2023-05-15",
-    "info": "A gripping tale set in a futuristic world where echoes of the past hold the key to humanity's destiny.",
+    "genre": "Dystopian",
+    "publicationDate": "2022-11-03",
+    "info": "Explore a hauntingly vivid dystopian landscape where hope is scarce, and survival is a constant struggle against the odds.",
     "score": 6,
     "__v": 0
 }
