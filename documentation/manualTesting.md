@@ -255,19 +255,19 @@ Test the API’s performance under heavy load, simulating a large number of user
 Verify that the API can recover gracefully from failures, such as database connection issues without compromising data integrity.
 
 ### Steps:
-1. Use a set collection of tests and disable the database while the tests are running. 
-2. Shut down the server while the collection of requests are running.
+1. Create valid parameters to simulate a disconnect.
+2. Implement those parameters to a GET-request and POST-request.
 
 ### Expected Result
 - The API should be able to handle and recover from the database connection error without losing data integrity.
 
 ## Result
-- The API identifies that there is no connection and fails to send requests. 
-- None of the data in the database was compromised. 
+- The API responds with the status code: 500 indicating a server error.
+- The error message MongoNotConnectedError: Client must be connected before running operations suggest a database connection issue.
 
-**Test Name:** /Runner & Concurrent Requests
+**Test Name:** /GET Book Disconnect & POST Book Disconnect
 
-**Location:** /Tests /Runner & Concurrent Requests
+**Location:** /Tests /Connection Error /GET Book Disconnect & POST Book Disconnect
 
 # Manual Testing 12
 

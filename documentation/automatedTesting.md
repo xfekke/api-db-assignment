@@ -236,25 +236,29 @@ Design an automated performance test that simulates a large number of users maki
 
 **Location:** /Tests /Runner
 
-# Automated Testing 11 - WIP WIP WIP
+# Automated Testing 11
 
 ## Connection Failure
 
 ### Purpose
-Create an automated test that verifies the API can recover gracefully from failures, such as database connection issues or third-party service outages, without compromising data integrity.
+Verify that the API can recover gracefully from failures, such as database connection issues without compromising data integrity.
 
 ### Steps:
-1. 
+1. Implement script to look for status code: 500, response is JSON and a message to previous requests.
 
 ### Expected Result
-- 
+- The API response should contain the status code of 500
+- The response should be in JSON format.
+- The response body should include an error message to indicate connection error.
 
 ## Result
-- 
+- Status code: 500, Internal Server Error.
+- The response is in JSON format.
+- The response body includes an error message.
 
-**Test Name:** /Runner & Concurrent Requests
+**Test Name:** /GET Book Disconnect & POST Book Disconnect
 
-**Location:** /Tests /Runner & Concurrent Requests
+**Location:** /Tests /Connection Error /GET Book Disconnect & POST Book Disconnect
 
 # Automated Testing 12
 
