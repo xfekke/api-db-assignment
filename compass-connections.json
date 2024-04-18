@@ -1,0 +1,27 @@
+{
+  "type": "Compass Connections",
+  "version": {
+    "$numberInt": "1"
+  },
+  "connections": [
+    {
+      "id": "b0751dde-d1bb-44fa-b730-238a617e5c10",
+      "lastUsed": {
+        "$date": {
+          "$numberLong": "1713446986465"
+        }
+      },
+      "favorite": {
+        "name": "api-assignment",
+        "color": "color4"
+      },
+      "savedConnectionType": "favorite",
+      "connectionOptions": {
+        "connectionString": "mongodb+srv://fekkeru:qwerty1234@cluster0.w3hrvjd.mongodb.net/",
+        "oidc": {
+          "serializedState": "eyJvaWRjUGx1Z2luU3RhdGVWZXJzaW9uIjowLCJzdGF0ZSI6W119"
+        }
+      }
+    }
+  ]
+}
