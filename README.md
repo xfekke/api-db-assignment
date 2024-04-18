@@ -20,6 +20,10 @@ Exported database file:
 #### Mock-Server Collection
 [Mock Server Collection](https://www.postman.com/gold-firefly-601719/workspace/api-db-assignment/collection/33841366-169a9988-7f29-4393-9c16-054b644e28a3?action=share&creator=33841366&active-environment=33841366-4dc57239-ce6d-48d5-9728-151255661fb6)
 
+### Documentation
+
+Manual and automated testing documentation exists in the `documentation`folder, each in a seperate file.
+
 ## Book API
 
 ### Endpoints
