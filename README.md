@@ -4,6 +4,9 @@
 
 This documentation covers my API assignment focused on books. The API enables users to search for books based on criteria such as title, author, genre, and publication date. Additionally, it provides information about the books and their ratings.
 
+Things I have added additionally to the project are:
+- Manual & automated test 14
+
 ### MongoDB
 
 MongoDB connection string:
