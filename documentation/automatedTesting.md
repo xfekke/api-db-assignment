@@ -280,7 +280,7 @@ Example: `http://localhost:3000/api/books?genre=Comedy`
 
 ## Result
 - The API returns a message that no books are found and returns no other data from the request.
--Example:
+- Example:
 ```
 {
     "message": "No books found"

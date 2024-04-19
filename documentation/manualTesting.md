@@ -6,8 +6,8 @@
 Verify that the API returns the correct HTTP status code (e.g., 200 OK) for a successful GET request.
 
 ### Steps:
-1. Send a GET-request to /GET-http://localhost:3000/api/books
-2. Send a GET-request to /GET-http://localhost:3000/api/authors 
+1. Send a GET-request to /GET-`http://localhost:3000/api/books`
+2. Send a GET-request to /GET-`http://localhost:3000/api/authors` 
 
 #### Expected Result
 - Status code: 200 OK
@@ -27,8 +27,8 @@ Verify that the API returns the correct HTTP status code (e.g., 200 OK) for a su
 Check if the API returns the expected data format (e.g., JSON, XML) in the response.
 
 ### Steps:
-1. Send a GET-request to /GET-http://localhost:3000/api/books
-2. Send a GET-request to /GET-http://localhost:3000/api/authors 
+1. Send a GET-request to /GET-`http://localhost:3000/api/books`
+2. Send a GET-request to /GET-`http://localhost:3000/api/authors` 
 
 #### Expected Result
 - Body contains expected JSON-format
@@ -36,13 +36,14 @@ Check if the API returns the expected data format (e.g., JSON, XML) in the respo
 ### Result
 - The response body matches the expected JSON-format.
 -Example: 
-
+```
     {
         "_id": "661d10a0fae54bc397af0edd",
         "firstName": "Odetta",
         "lastName": "Dmych",
         "__v": 0
     }
+```
 
 **Test Name:** /GET books & /GET authors
 
@@ -56,7 +57,7 @@ Check if the API returns the expected data format (e.g., JSON, XML) in the respo
 Ensure that the API returns the correct HTTP status code (e.g., 400 Bad Request) for an invalid request.
 
 ### Steps:
-1. Send a GET-request to /GET-http://localhost:3000/api/booksx?2 
+1. Send a GET-request to /GET-`http://localhost:3000/api/booksx?2` 
 
 #### Expected Result
 - Status code: 404 Not Found
@@ -77,7 +78,7 @@ This test verifies that the API returns the correct data when querying books by 
 
 ### Steps:
 1. Construct a GET-request to the API with the genre filter.
-2. Send a GET-request to /GET-http://localhost:3000/api/books?genre=Horror 
+2. Send a GET-request to /GET-`http://localhost:3000/api/books?genre=Horror` 
 
 ### Expected Result
 - Verify that the API returns data for books with the specified genre "Horror".
@@ -109,7 +110,7 @@ Verify that the API returns paginated results when a large number of records are
 - The API returned a paginated list of books, with 10 records per page as expected. 
 - The results were consistent with the specified pagination parameters and pages could be accessed by adjusting the page parameter in the URL.
 - Example:
-
+```
     "totalDocs": 50,
     "limit": 10,
     "totalPages": 5,
@@ -119,6 +120,7 @@ Verify that the API returns paginated results when a large number of records are
     "hasNextPage": true,
     "prevPage": null,
     "nextPage": 2
+```
 
 **Test Name:** /GET pagination
 
@@ -133,7 +135,7 @@ Check if the API handles special characters and non-English text correctly in in
 
 ### Steps:
 1. Make a GET-request with special characters to get a specified author with special characters in his/hers name.
-- Example: http://localhost:3000/api/authors?firstName=Åke&lastName=Svensson 
+- Example: `http://localhost:3000/api/authors?firstName=Åke&lastName=Svensson` 
 
 ### Expected Result
 - The API should return the author according to the parameters, even when special characters are used.
@@ -141,7 +143,7 @@ Check if the API handles special characters and non-English text correctly in in
 ## Result
 - The API returned the specified author as expected.
 - Example:
-
+```
 [
     {
         "_id": "661d10a0fae54bc397af0eef",
@@ -150,6 +152,7 @@ Check if the API handles special characters and non-English text correctly in in
         "__v": 0
     }
 ]
+```
 
 **Test Name:** /GET special character
 
@@ -278,18 +281,19 @@ Test the API’s ability to handle edge cases, such as requests with missing or 
 
 ### Steps:
 1. Create a GET-request with invalid parameters, for example a genre that does not exist in the database. 
-Example: http://localhost:3000/api/books?genre=Comedy
+Example: `http://localhost:3000/api/books?genre=Comedy`
 
 ### Expected Result
 - An error message will be returned and no books will be found.
 
 ## Result
 - The API returns a message that no books are found and returns no other data from the request.
--Example:
-
+- Example:
+```
 {
     "message": "No books found"
 }
+```
 
 **Test Name:** /GET Invalid Parameters
 
