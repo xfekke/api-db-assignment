@@ -21,11 +21,17 @@ export default function (server, mongoose) {
   // GET all books (w/ parameters)
   server.get('/api/books', async (req, res) => {
     try {
+      const maxParams = 2;
+      if (Object.keys(req.query).length > maxParams) {
+        return res.status(400).json({ message: `Too many parameters. Maximum allowed is ${maxParams}.` });
+      }
+
       if (req.query.disconnect === 'true') {
         if (isConnected) {
           await mongoose.disconnect();
           isConnected = false;
         }
+
       } else {
         if (!isConnected) {
           // Reconnect

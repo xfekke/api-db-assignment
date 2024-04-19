@@ -320,3 +320,25 @@ Verify that the API correctly implements rate limiting or throttling mechanisms 
 **Test Name:** /GET Invalid Parameters
 
 **Location:** /Tests /Get-requests /GET Invalid Parameters
+
+# Manual Testing 14
+
+## Max Parameters
+
+### Purpose
+Verify that the API handles requests with too many parameters appropriately.
+
+### Steps:
+1. Send more than the maximum allowed number of parameters in a single request to the API.
+
+### Expected Result
+- The API should return a status code: 400
+- The API should return a message indicating that there are too many parameters in the request.
+
+## Result
+- The API returns the status code: 400
+- The API returned the correct response message indicating that there are too many parameters in the request.
+
+**Test Name:** /GET Too Many Parameters
+
+**Location:** /Extra Tests /GET Too Many Parameters

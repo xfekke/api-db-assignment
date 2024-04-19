@@ -313,3 +313,25 @@ Write an automated test to verify that the API correctly implements any rate lim
 **Test Name:** /Rate Limiting
 
 **Location:** /Tests /Rate Limiting
+
+# Manual Testing 14
+
+## Max Parameters
+
+### Purpose
+Verify that the API handles requests with too many parameters appropriately.
+
+### Steps:
+1. Add script to existing GET-request with too many parameters that looks for response message and status code.
+
+### Expected Result
+- The API should return a status code: 400
+- The API should return the correct response message.
+
+## Result
+- The API returns the status code: 400
+- The API returned the correct response message indicating that there are too many parameters in the request.
+
+**Test Name:** /GET Too Many Parameters
+
+**Location:** /Extra Tests /GET Too Many Parameters
