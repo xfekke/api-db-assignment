@@ -100,7 +100,7 @@ Verify that the API returns paginated results when a large number of records are
 
 ### Steps:
 1. Make a GET request to retrieve the list of books
-2. Include pagination parameters in the request URL, specifying the desired page and limit. example: http://localhost:3000/api/books?page=1&limit=10 
+2. Include pagination parameters in the request URL, specifying the desired page and limit. example: `http://localhost:3000/api/books?page=1&limit=10` 
 
 ### Expected Result
 - The API should return paginated results according to the pagination parameters.
