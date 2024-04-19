@@ -22,7 +22,7 @@ Exported database file:
 
 ### Documentation
 
-Manual and automated testing documentation exists in the `documentation`folder, each in a seperate file.
+Manual and automated testing documentation exists in the `documentation` folder, each in a seperate file.
 
 ## Book API
 

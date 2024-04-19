@@ -194,6 +194,6 @@ export default function (server, mongoose) {
     }
   });
   server.get('/api/books/invalid', async (req, res) => {
-    res.status(400).json({ message: "Ogiltig förfrågan" });
+    res.status(400).json({ message: "Unvalid Request" });
   });
 }

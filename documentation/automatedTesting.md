@@ -6,14 +6,14 @@
 Verify that the API returns the correct HTTP status code (e.g., 200 OK) for a successful GET request.
 
 ### Steps:
-1. Send a GET-request to /GET-http://localhost:3000/api/books
-2. Send a GET-request to /GET-http://localhost:3000/api/authors 
+1. Send a GET-request to /GET-`http://localhost:3000/api/books`
+2. Send a GET-request to /GET-`http://localhost:3000/api/authors` 
 
 #### Expected Result
 - Status code: 200 OK
 
 ### Result
-- Statuscode: 200 OK
+- Status code: 200 OK
 
 **Test Name:** /GET books & /GET authors
 
@@ -28,7 +28,7 @@ Verify that the API returns the expected data format (e.g., JSON, XML) in the re
 
 ### Steps:
 1. Implement test code to an existing request.
-2. Send a GET-request to /GET-http://localhost:3000/api/books
+2. Send a GET-request to /GET-`http://localhost:3000/api/books`
 
 #### Expected Result
 - Body contains expected JSON-format
@@ -36,12 +36,14 @@ Verify that the API returns the expected data format (e.g., JSON, XML) in the re
 ### Result
 - The response body matches the expected JSON-format.
 -Example: 
+```
     {
         "_id": "661d10a0fae54bc397af0edd",
         "firstName": "Odetta",
         "lastName": "Dmych",
         "__v": 0
     }
+```
 
 **Test Name:** /GET books 
 
@@ -56,7 +58,7 @@ Ensure that the API returns the correct HTTP status code (e.g., 400 Bad Request)
 
 ### Steps:
 1. Implement test code to an existing request.
-2. Send a GET-request to /GET-http://localhost:3000/api/booksx?2 
+2. Send a GET-request to /GET-`http://localhost:3000/api/booksx?2` 
 
 #### Expected Result
 - Status code: 404 Not Found
@@ -77,7 +79,7 @@ Create an automated test that sends a request with specific filters or search cr
 
 ### Steps:
 1. Implement test code to an existing request.
-2. Send a GET-request to /GET-http://localhost:3000/api/books?genre=Horror 
+2. Send a GET-request to /GET-`http://localhost:3000/api/books?genre=Horror` 
 
 ### Expected Result
 - Verify that the API returns data for books with the specified genre "Horror".
@@ -99,7 +101,7 @@ Write an automated test to verify that the API returns paginated results when a 
 
 ### Steps:
 1. Implement test code to an existing request.
-2. Include pagination parameters in the request URL, specifying the desired page and limit. example: http://localhost:3000/api/books?page=1&limit=10 
+2. Include pagination parameters in the request URL, specifying the desired page and limit. example: `http://localhost:3000/api/books?page=1&limit=10` 
 
 ### Expected Result
 - The API should return paginated results according to the pagination parameters.
@@ -122,7 +124,7 @@ Test if the API handles special characters and non-English text correctly in inp
 ### Steps:
 1. Implement test code to an existing request that compares the response with the assumed output.
 2. Make a GET-request with special characters to get a specified author with special characters in his/hers name.
-- Example: http://localhost:3000/api/authors?firstName=Åke&lastName=Svensson 
+- Example: `http://localhost:3000/api/authors?firstName=Åke&lastName=Svensson` 
 
 ### Expected Result
 - The API should return the author according to the parameters, even when special characters are used.
@@ -130,6 +132,7 @@ Test if the API handles special characters and non-English text correctly in inp
 ## Result
 - The API returned the specified author as expected.
 - Example:
+```
 [
     {
         "_id": "661d10a0fae54bc397af0eef",
@@ -138,6 +141,7 @@ Test if the API handles special characters and non-English text correctly in inp
         "__v": 0
     }
 ]
+```
 
 **Test Name:** /GET special character
 
@@ -269,7 +273,7 @@ Develop an automated test to handle edge cases, such as requests with missing or
 
 ### Steps:
 1. Implement code that looks for the correct message response in an existing GET request.
-Example: http://localhost:3000/api/books?genre=Comedy
+Example: `http://localhost:3000/api/books?genre=Comedy`
 
 ### Expected Result
 - An error message will be returned and no books will be found.
@@ -277,9 +281,11 @@ Example: http://localhost:3000/api/books?genre=Comedy
 ## Result
 - The API returns a message that no books are found and returns no other data from the request.
 -Example:
+```
 {
     "message": "No books found"
 }
+```
 
 **Test Name:** /GET Invalid Parameters
 
