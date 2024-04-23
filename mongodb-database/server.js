@@ -4,11 +4,10 @@ import mongoose from "mongoose";
 import { rateLimit } from 'express-rate-limit';
 import apiRegister from "./apiRegister.js";
 
-// Läs in konfigurationsvariabler från .env-filen
+// .env
 dotenv.config();
-console.log("MONGODB_URI from .env:", process.env.MONGODB_URI); // Logga värdet av MONGODB_URI
+console.log("MONGODB_URI from .env:", process.env.MONGODB_URI); 
 
-// Skapar en instans av Express-appen, detta är vår webbserver.
 const server = express();
 const port = 3000;
 

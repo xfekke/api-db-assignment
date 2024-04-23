@@ -1,4 +1,8 @@
 import mongoosePaginate from 'mongoose-paginate-v2';
+import dotenv from 'dotenv';
+
+dotenv.config();
+console.log("MONGODB_URI from .env:", process.env.MONGODB_URI); 
 
 export default function (server, mongoose) {
   let isConnected = true
@@ -35,7 +39,11 @@ export default function (server, mongoose) {
       } else {
         if (!isConnected) {
           // Reconnect
-          await mongoose.connect("mongodb+srv://fekkeru:qwerty1234@cluster0.w3hrvjd.mongodb.net/");
+          await mongoose.connect(process.env.MONGODB_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+          });
+          console.log("Connected to MongoDB");
           isConnected = true;
         }
       }
@@ -81,7 +89,11 @@ export default function (server, mongoose) {
       } else {
         if (!isConnected) {
           // Reconnect
-          await mongoose.connect("mongodb+srv://fekkeru:qwerty1234@cluster0.w3hrvjd.mongodb.net/");
+          await mongoose.connect(process.env.MONGODB_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+          });
+          console.log("Connected to MongoDB");
           isConnected = true;
         }
       }
