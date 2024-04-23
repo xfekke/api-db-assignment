@@ -13,6 +13,14 @@ Things I have added additionally to the project are:
 MongoDB connection string:
 `mongodb+srv://fekkeru:qwerty1234@cluster0.w3hrvjd.mongodb.net/`
 
+**Setup:**
+1. Create a `.env` file in the `mongodb-databse` folder.
+2. Add the MongoDB connection string after `MONGODB_URI=` in the `.env` file.
+
+This `.env` file will securely store your MongoDB connection string, allowing your application to access the database without exposing sensitive information.
+
+**Note:** Make sure to include .env in your .gitignore file to prevent it from being tracked.
+
 Exported database file:
 `compass-connections.json`
 
