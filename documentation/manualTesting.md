@@ -37,12 +37,12 @@ Check if the API returns the expected data format (e.g., JSON, XML) in the respo
 - The response body matches the expected JSON-format.
 -Example: 
 ```
-    {
-        "_id": "661d10a0fae54bc397af0edd",
-        "firstName": "Odetta",
-        "lastName": "Dmych",
-        "__v": 0
-    }
+{
+    "_id": "661d10a0fae54bc397af0edd",
+    "firstName": "Odetta",
+    "lastName": "Dmych",
+    "__v": 0
+}
 ```
 
 **Test Name:** /GET books & /GET authors
@@ -111,15 +111,15 @@ Verify that the API returns paginated results when a large number of records are
 - The results were consistent with the specified pagination parameters and pages could be accessed by adjusting the page parameter in the URL.
 - Example:
 ```
-    "totalDocs": 50,
-    "limit": 10,
-    "totalPages": 5,
-    "page": 1,
-    "pagingCounter": 1,
-    "hasPrevPage": false,
-    "hasNextPage": true,
-    "prevPage": null,
-    "nextPage": 2
+"totalDocs": 50,
+"limit": 10,
+"totalPages": 5,
+"page": 1,
+"pagingCounter": 1,
+"hasPrevPage": false,
+"hasNextPage": true,
+"prevPage": null,
+"nextPage": 2
 ```
 
 **Test Name:** /GET pagination

@@ -37,12 +37,12 @@ Verify that the API returns the expected data format (e.g., JSON, XML) in the re
 - The response body matches the expected JSON-format.
 -Example: 
 ```
-    {
-        "_id": "661d10a0fae54bc397af0edd",
-        "firstName": "Odetta",
-        "lastName": "Dmych",
-        "__v": 0
-    }
+{
+    "_id": "661d10a0fae54bc397af0edd",
+    "firstName": "Odetta",
+    "lastName": "Dmych",
+    "__v": 0
+}
 ```
 
 **Test Name:** /GET books 

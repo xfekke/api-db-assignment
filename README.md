@@ -69,22 +69,22 @@ Retrieve a list of authors.
 **Response:**
 ```
 {
-            "_id": "661d4b8ec98662b7dc6d7457",
-            "title": "Echoes of the Future",
-            "authors": [
-                {
-                    "_id": "661d10a0fae54bc397af0edd",
-                    "firstName": "Odetta",
-                    "lastName": "Dmych",
-                    "__v": 0
-                }
-            ],
-            "genre": "Science Fiction",
-            "publicationDate": "2023-05-15",
-            "info": "A gripping tale set in a futuristic world where echoes of the past hold the key to humanity's destiny.",
-            "score": 6,
+    "_id": "661d4b8ec98662b7dc6d7457",
+    "title": "Echoes of the Future",
+    "authors": [
+        {
+            "_id": "661d10a0fae54bc397af0edd",
+            "firstName": "Odetta",
+            "lastName": "Dmych",
             "__v": 0
         }
+    ],
+    "genre": "Science Fiction",
+    "publicationDate": "2023-05-15",
+    "info": "A gripping tale set in a futuristic world where echoes of the past hold the key to humanity's destiny.",
+    "score": 6,
+    "__v": 0
+}
 ```
 ### Get a specific book
 
