@@ -6,6 +6,7 @@ This documentation covers my API assignment focused on books. The API enables us
 
 Things I have added additionally to the project are:
 - Manual & automated test 14
+- Hidden the MongoDB connection string in a .env file
 
 ### MongoDB
 
