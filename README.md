@@ -19,7 +19,7 @@ MongoDB connection string:
 
 This `.env` file will securely store your MongoDB connection string, allowing your application to access the database without exposing sensitive information.
 
-**Note:** Make sure to include .env in your .gitignore file to prevent it from being tracked.
+**Note:** Make sure to include .env in a .gitignore file to prevent it from being tracked.
 
 Exported database file:
 `compass-connections.json`
