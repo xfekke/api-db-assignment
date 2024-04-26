@@ -10,6 +10,8 @@ Things I have added additionally to the project are:
 
 ### MongoDB
 
+If you want to use my connection string:
+
 MongoDB connection string:
 `mongodb+srv://fekkeru:qwerty1234@cluster0.w3hrvjd.mongodb.net/`
 
@@ -17,9 +19,15 @@ MongoDB connection string:
 1. Create a `.env` file in the `mongodb-databse` folder.
 2. Add the MongoDB connection string after `MONGODB_URI=` in the `.env` file.
 
-This `.env` file will securely store your MongoDB connection string, allowing your application to access the database without exposing sensitive information.
+This `.env` file will securely store the MongoDB connection string, allowing the application to access the database without exposing sensitive information.
 
-**Note:** Make sure to include .env in a .gitignore file to prevent it from being tracked.
+**Note:** Make sure to include `.env` in a `.gitignore` file to prevent it from being tracked.
+
+**Note:** If you want to add the data to your own MongoDB, the exported data is also in **JSON**-files. To manually add them, the files are in the folder: `mongoDB-export`.
+
+The /book api data-file: `test.books.json`.
+
+The /author api data-file: `test.author.json`.
 
 Exported database file:
 `compass-connections.json`
