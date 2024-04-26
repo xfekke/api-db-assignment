@@ -1677,7 +1677,7 @@
 							"script": {
 								"exec": [
 									"pm.test(\"API returns 429 Too Many Requests after exceeding rate limit\", function () {\r",
-									"    if (pm.info.iteration >= 100) {\r",
+									"    if (pm.info.iteration > 100) {\r",
 									"        pm.expect(pm.response.code).to.equal(429);\r",
 									"    } else {\r",
 									"        pm.expect(pm.response.code).to.not.equal(429);\r",

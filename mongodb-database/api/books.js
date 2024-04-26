@@ -119,7 +119,10 @@ export default function (server, mongoose) {
       } else {
         if (!isConnected) {
           // Reconnect
-          await mongoose.connect("mongodb+srv://fekkeru:qwerty1234@cluster0.w3hrvjd.mongodb.net/");
+          await mongoose.connect(process.env.MONGODB_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+          });
           isConnected = true;
         }
       }
@@ -161,7 +164,10 @@ export default function (server, mongoose) {
       } else {
         if (!isConnected) {
           // Reconnect
-          await mongoose.connect("mongodb+srv://fekkeru:qwerty1234@cluster0.w3hrvjd.mongodb.net/");
+          await mongoose.connect(process.env.MONGODB_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+          });
           isConnected = true;
         }
       }
@@ -197,7 +203,10 @@ export default function (server, mongoose) {
       } else {
         if (!isConnected) {
           // Reconnect
-          await mongoose.connect("mongodb+srv://fekkeru:qwerty1234@cluster0.w3hrvjd.mongodb.net/");
+          await mongoose.connect(process.env.MONGODB_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+          });
           isConnected = true;
         }
       }
