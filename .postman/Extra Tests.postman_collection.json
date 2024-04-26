@@ -1,0 +1,137 @@
+{
+	"info": {
+		"_postman_id": "cfad6735-887b-4588-815c-784753c0be74",
+		"name": "Extra Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33841366",
+		"_collection_link": "https://www.postman.com/gold-firefly-601719/workspace/api-db-assignment/collection/33841366-cfad6735-887b-4588-815c-784753c0be74?action=share&source=collection_link&creator=33841366"
+	},
+	"item": [
+		{
+			"name": "Too Many Parameters",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response should indicate that too many parameters are used\", function () {\r",
+							"    pm.response.to.have.status(400); \r",
+							"    pm.expect(pm.response.json().message).to.eql(\"Too many parameters. Maximum allowed is 2.\"); \r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/books?genre=Horror&page=1&limit=3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"books"
+					],
+					"query": [
+						{
+							"key": "genre",
+							"value": "Horror"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "limit",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Too Many Parameters",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/books?genre=Horror&page=1&limit=3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"books"
+							],
+							"query": [
+								{
+									"key": "genre",
+									"value": "Horror"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "RateLimit-Policy",
+							"value": "100;w=900"
+						},
+						{
+							"key": "RateLimit",
+							"value": "limit=100, remaining=95, reset=613"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "56"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"38-kxTwwRBW+9ZJ3VH0EQ+iiEbBSuk\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 19 Apr 2024 09:32:03 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Too many parameters. Maximum allowed is 2.\"\n}"
+				}
+			]
+		}
+	]
+}
