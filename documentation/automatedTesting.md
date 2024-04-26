@@ -122,7 +122,7 @@ Write an automated test to verify that the API returns paginated results when a 
 Test if the API handles special characters and non-English text correctly in input data and returns responses using an automated testing tool.
 
 ### Steps:
-1. Implement test code to an existing request that compares the response with the assumed output.
+1. Implement test code to an existing request that compares the response with the assumed output. The code should compare that the attributes in the response matches the data in the database.
 2. Make a GET-request with special characters to get a specified author with special characters in his/hers name.
 - Example: `http://localhost:3000/api/authors?firstName=Åke&lastName=Svensson` 
 
@@ -156,7 +156,8 @@ Test the API’s response when sending concurrent requests to ensure that it can
 
 ### Steps:
 1. Add tests to the POST-requests in the Concurrent Requests collection.
-2. Run the collection and observe the test results.
+2. Add a script to see that the status code is correct and gives the result: 201.
+3. Run the collection and observe the test results.
 
 ### Expected Result
 - The API should be able to handle and respond to all requests correctly.
@@ -179,7 +180,7 @@ Test the API’s response when sending concurrent requests to ensure that it can
 Test if the API correctly handles different HTTP methods (GET, POST, PUT, DELETE) for each endpoint and returns appropriate status codes and responses for each method.
 
 ### Steps:
-1. Add the correct scripts for the existing requests to check that the status codes are correct.
+1. Add the correct scripts for the existing requests to check that the status codes are correct. 201 for POST-requests and 200 for the remaining.
 2. Run each test separately one after the other. 
 
 ### Expected Result
@@ -204,7 +205,7 @@ Test if the API correctly handles different HTTP methods (GET, POST, PUT, DELETE
 Write an automated test to check if the API correctly handles updates to existing records, ensuring that changes are saved and reflected in subsequent requests.
 
 ### Steps:
-1. Implement code to existing PUT-request that compares the new title to the old one.
+1. Implement code to existing PUT-request that compares the new title to the old one. The new title should not equal the old one.
 
 ### Expected Result
 - The specified book in the test will be updated correctly and without conflict.
@@ -273,7 +274,8 @@ Develop an automated test to handle edge cases, such as requests with missing or
 
 ### Steps:
 1. Implement code that looks for the correct message response in an existing GET request.
-Example: `http://localhost:3000/api/books?genre=Comedy`
+Example: `http://localhost:3000/api/books?genre=Comedy`.
+2. The script should also check that the response includes the correct message when the request fails. It should say: `No books found`.
 
 ### Expected Result
 - An error message will be returned and no books will be found.
@@ -303,6 +305,11 @@ Write an automated test to verify that the API correctly implements any rate lim
 2. Code will check for status code 200 for the first 100 and 429 for the remaining 100 iterations.
 3. Run 200 iterations (100 requests in 15 minutes is the max allowed amount for this API).
 
+### How to run test:
+
+1. Restart the server if it's already on, otherwise the test will fail. The test will check the 100 iterations if they work and that the remaining ones fails. This will not work if there has been previous requests while the server is up, some of the iteration-tests will fail.
+2. Run the folder `Rate Limiting` for 200 iterations, not the actual GET-request.
+
 ### Expected Result
 - The API returns the correct status code for every iteration.
 
@@ -331,6 +338,7 @@ Verify that the API handles requests with too many parameters appropriately.
 ## Result
 - The API returns the status code: 400
 - The API returned the correct response message indicating that there are too many parameters in the request.
+- Returned message says: *"Too many parameters. Maximum allowed is 2."*
 
 **Test Name:** /GET Too Many Parameters
 
