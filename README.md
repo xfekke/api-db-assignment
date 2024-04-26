@@ -2,6 +2,8 @@
 
 ## Introduction
 
+I am aiming to get *VG* as the grade for this assignment.
+
 This documentation covers my API assignment focused on books. The API enables users to search for books based on criteria such as title, author, genre, and publication date. Additionally, it provides information about the books and their ratings.
 
 Things I have added additionally to the project are:
