@@ -62,7 +62,7 @@ npm install mongoose-paginate-v2
 ```
 npm i express-rate-limit  
 ```
-> To install the rate-limiting middlewar for express.
+> To install the rate-limiting middleware for express.
 ```
 npm install -g nodemon 
 ```
