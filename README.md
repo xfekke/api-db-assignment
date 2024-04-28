@@ -67,6 +67,11 @@ npm i express-rate-limit
 npm install -g nodemon 
 ```
 > Installed to avoid having to restart the server after making changes. 
+```
+npm install dotenv
+```
+> To hide the mongoDB string.
+
 
 ## Documentation
 
