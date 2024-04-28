@@ -66,7 +66,7 @@ npm i express-rate-limit
 ```
 npm install -g nodemon 
 ```
-Installed to avoid having to restart the server after making changes. 
+> Installed to avoid having to restart the server after making changes. 
 
 ## Documentation
 
