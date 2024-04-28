@@ -45,7 +45,30 @@ Exported database file:
 #### Postman JSON
 The Postman collections and environment is also imported to the `.postman` folder. There is 3 collections: Tests, Extra Tests and Tests Mock.
 
-### Documentation
+## Dependecies
+
+```
+npm init -y   
+```
+> To create the package.json file.
+```
+npm i express mongoose  
+```
+> To install express and mongoose.
+```
+npm install mongoose-paginate-v2  
+```
+> To install the pagination library.
+```
+npm i express-rate-limit  
+```
+> To install the rate-limiting middlewar for express.
+```
+npm install -g nodemon 
+```
+Installed to avoid having to restart the server after making changes. 
+
+## Documentation
 
 Manual and automated testing documentation exists in the `documentation` folder, each in a seperate file.
 
@@ -86,7 +109,7 @@ Retrieve a list of authors.
 
 **Request:**
 
-#### GET http://localhost:3000/api
+#### GET `http://localhost:3000/api`
 
 **Response:**
 ```
@@ -112,7 +135,7 @@ Retrieve a list of authors.
 
 **Request:**
 
-#### GET http://localhost:3000/api/books/661d4b8ec98662b7dc6d745d
+#### GET `http://localhost:3000/api/books/661d4b8ec98662b7dc6d745d`
 
 **Response:**
 ```
@@ -138,7 +161,7 @@ Retrieve a list of authors.
 
 **Request:**
 
-#### POST http://localhost:3000/api
+#### POST `http://localhost:3000/api`
 
 **Response:**
 ```
@@ -161,7 +184,7 @@ Retrieve a list of authors.
 
 **Request:**
 
-#### POST http://localhost:3000/api/books/66213251fc8543202b1a9166
+#### POST `http://localhost:3000/api/books/66213251fc8543202b1a9166`
 
 **Response:**
 ```
